@@ -7,6 +7,22 @@ cask "qgroundcontrol" do
   name "QGroundControl"
   desc "Ground control station for drones"
   homepage "http://qgroundcontrol.com/"
+  
+  livecheck do
+    url :url
+    strategy :extract_plist
+  end
 
   app "qgroundcontrol.app"
+  
+  uninstall quit: "org.qgroundcontrol.QGroundControl"
+  
+  zap trash: [
+               '~/Library/Saved Application State/org.qgroundcontrol.QGroundControl.savedState',
+               '~/Library/Caches/QGCMapCache300',
+               '~/Library/Caches/QGroundControl.org',
+               '~/Library/Preferences/org.qgroundcontrol.QGroundControl.plist',
+               '~/Library/Application Support/CrashReporter/QGroundControl_*.plist',
+               '~/Library/Logs/DiagnosticReports/QGroundControl_*.plist',
+             ]
 end
